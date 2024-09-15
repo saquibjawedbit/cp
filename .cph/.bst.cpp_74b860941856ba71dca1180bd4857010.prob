@@ -1,0 +1,1 @@
+{"name":"Local: bst","url":"c:\\Users\\BIT\\Documents\\cp\\bst.cpp","tests":[{"id":1715155659549,"input":"10 8 21 7 27 5 4 3 -1","output":"10\n8 21\n7 27\n5\n4\n3\n21\n8 27\n7\n5\n4\n3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\BIT\\Documents\\cp\\bst.cpp","group":"local","local":true}

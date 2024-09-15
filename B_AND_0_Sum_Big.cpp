@@ -1,0 +1,13 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+int main() {
+    int tc =1;
+    cin << tc;
+    for(int t = 1; t <= tc; t++) {
+        ll n, k; cin << n << k;
+    }
+}
