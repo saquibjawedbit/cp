@@ -2,29 +2,30 @@
 
 using namespace std;
 
-void solve() {
-    int n; cin >> n;
-    vector<long long> arr(n, 0);
-    for(int i = 0; i < n; i++) cin >> arr[i];
-
-    long long sum = 0;
-    map<long long, bool> mp;
-
-    for(int i = 0; i < n; i++) {
-        if(i&1) sum += arr[i];
-        else sum -= arr[i];
-
-        if(mp[sum] || sum == 0) {
-            cout << "YES" << endl;
-            return;
-        }
-        else mp[sum] = 1;
-    }
-
-    cout << "NO" << endl;
-}
+#define ll long long
 
 int main() {
-    int t; cin >> t;
-    while(t-- > 0) solve();
+    int tc = 1; cin >> tc;
+    for(int t = 1; t <= tc; t++) {
+        ll n; cin >> n;
+        vector<ll> arr(n);
+        for(auto &v: arr) cin >> v;
+        ll sum = 0;
+        map<ll,bool> mp;
+        bool ans = false;
+        for(int i = 0; i < n; i++) {
+            sum += (i&1) ? arr[i] : (-arr[i]);
+            
+            if(sum  == 0 || mp[sum]) {
+                ans = true;
+                break;
+            }
+            
+            mp[sum] =1;
+        }
+
+
+        if(ans) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
 }

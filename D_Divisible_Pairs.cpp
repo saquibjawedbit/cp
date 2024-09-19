@@ -1,23 +1,28 @@
-#include <iostream>
-#include <map>
+#include <bits/stdc++.h>
 
 using namespace std;
 
+#define ll long long
+
 int main() {
-    long long t; cin >> t;
-    while(t-- > 0) {
-        long long n, x, y; cin >> n >> x >> y;
-        long long *arr = new long long[n];
+    int tc = 1; cin >> tc;
+    for(int t = 1; t <= tc; t++) {
+        ll n, x, y; cin >> n >> x >> y;
+        vector<ll> arr(n);
+        for(auto &v: arr) cin >> v;
 
-        for(long long i = 0; i < n; i++) cin >> arr[i];
-
-        long long ans = 0;
-        map<pair<long long, long long>, long long> mp;
-        for(long long i = 0; i < n; i++) {
-            ans += mp[make_pair((x-arr[i] % x) %x, arr[i] % y)];
-            mp[make_pair(arr[i] % x, arr[i] % y)]++;
+        ll ans = 0;
+        map<pair<ll,ll>, ll> mp;
+        for(auto v: arr) {
+            ll add = (x - v % x) % x;
+            ll sub = v % y;
+            //cout << v << " " << add << " " << sub << endl;
+            if(mp[{add, sub}] != 0)  {
+                ans += mp[{add, sub}];
+            }
+            mp[{v%x, v%y}]++;
         }
+
         cout << ans << endl;
     }
-    return 0;
 }

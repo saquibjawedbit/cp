@@ -2,42 +2,46 @@
 
 using namespace std;
 
-void solve() {
-    int n; cin >> n;
-    int *arr = new int[n];
-
-    for(int i = 0; i < n; i++) cin >> arr[i];
-    
-    vector<int> diff;
-    for(int i = 0; i < n-1; i++) {
-        if(arr[i] != arr[i+1]) diff.push_back(i);
-    }
-
-    int q; cin >> q;
-    for(int i = 0; i < q; i++) {
-        int a, b; cin >> a >> b;
-        a--; b--;
-
-        int start = 0, end = diff.size()-1;
-        bool found = false;
-        while(end >= start) {
-            int mid = end + (start - end)/2;
-            if(diff[mid] >= a && diff[mid] < b) {
-                cout << diff[mid]+1 << " " << diff[mid] + 2 << endl;
-                found = true;
-                break;
-            }
-            else if(diff[mid] >= a && diff[mid] >= b) end = mid -1;
-            else if(diff[mid] < a) start = mid +1;
-        }
-        if(!found) cout << "-1 -1" << endl;
-    }
-
-    cout << endl;
-}
-
+#define ll long long
 
 int main() {
-    int t; cin >> t;
-    while(t-- > 0) solve();
+    int tc  =1; cin >> tc;
+    for(int t = 1; t <= tc; t++) {
+        ll n; cin >> n;
+        vector<ll> arr(n);
+        for(auto &v: arr) cin >> v;
+
+        vector<ll> next(n, -1);
+        ll nextElement = n-1;
+        for(int i = n-1; i >= 0; i--) {
+            if(arr[nextElement] != arr[i]) {
+                next[i] = nextElement+1;
+            } 
+            else if(i != n-1) {
+                next[i] = next[i+1];
+            }
+
+            nextElement = i;
+        }
+
+        // for(auto &v : next) {
+        //     cout << v << " ";
+        // } cout << endl;
+
+
+        ll q; cin >> q;
+        while(q -- > 0) {
+            ll l, r; cin >> l >> r;
+            ll left = next[l-1];
+            ll right = next[r-1];
+            if(left <= r && left != -1) {
+                cout << l << " " << left << endl;
+            }
+            else {
+                cout << -1 << " " << -1 << endl;
+            }
+        }
+        cout << endl;
+
+    }
 }
