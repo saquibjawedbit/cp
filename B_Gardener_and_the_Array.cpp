@@ -2,35 +2,39 @@
 
 using namespace std;
 
+#define ll long long
+
 int main() {
-    int tc = 0; cin >> tc;
-    for(int t = 0; t < tc; t++) {
-        int n; cin >> n;
-        bool ans = false;
-        map<int, int> mp;
-        vector<vector<int>> arr(n);
-        for(int i = 0; i < n; i++) {
+    int tc = 1; cin >> tc;
+    for(int t = 1; t <= tc; t++) {
+        ll n; cin >> n;
+        vector<vector<ll>> arr(n);
+        map<ll, ll> mp;
+        for(auto &v: arr) {
             int k; cin >> k;
-            vector<int> temp(k , 0);
-            for(int j = 0; j < k; j++) {
-                cin >> temp[j];
-                mp[temp[j]]++;
+            while(k-- > 0) {
+                ll a; cin >> a;
+                v.push_back(a);
+                mp[a]++;
             }
-            arr[i] = temp;
         }
+
+        bool ans = false;
         for(int i = 0; i < n; i++) {
-            int count = 0;
+            ll cnt = 0;
             for(int j = 0; j < arr[i].size(); j++) {
-                if(mp[arr[i][j]] > 1) count++;
-                else break;
+                if(mp[arr[i][j]] > 1) cnt++;
+                
             }
-            if(count == arr[i].size()) {
-                ans = true;
+            if(cnt == arr[i].size()) {
+                ans = !ans;
                 break;
             }
         }
+
         if(ans) cout << "Yes" << endl;
         else cout << "No" << endl;
-    }
 
+        
+    }
 }
