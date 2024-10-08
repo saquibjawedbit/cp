@@ -13,7 +13,6 @@ int main() {
         ll k, x, n; cin >> k >> x >> n;
         ll coins = n, spent = 0;
 
-
         while(x-- > 0) {
             ll nCoins = spent/(k-1);
             nCoins++;

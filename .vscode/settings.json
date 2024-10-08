@@ -26,7 +26,9 @@
         "chrono": "cpp",
         "new": "cpp",
         "format": "cpp",
-        "hashpjw-use.C": "cpp"
+        "hashpjw-use.C": "cpp",
+        "map": "cpp",
+        "numeric": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
