@@ -1,19 +1,26 @@
-def min_range(n, a, b, c):
-    min_val = min(c)
-    max_val = max(c)
+import os
 
-    if a * b > 0:
-        return max_val - min_val
+# Function to rename all files in a folder by adding a prefix
+def rename_files_in_folder(folder_path, prefix):
+    # Loop through all the files in the folder
+    for filename in os.listdir(folder_path):
+        # Get the file extension and original name without extension
+        file_name, file_extension = os.path.splitext(filename)
+        
+        # Create new filename with the prefix
+        new_filename = f"{prefix}{file_name}{file_extension}"
+        
+        # Original file path
+        original_path = os.path.join(folder_path, filename)
+        # New file path
+        new_file_path = os.path.join(folder_path, new_filename)
 
-    target = (min_val + max_val) // 2
-    min_diff = float('inf')
-    for num in c:
-        min_diff = min(min_diff, abs(num - target))
+        # Renaming the file
+        os.rename(original_path, new_file_path)
+        print(f"Renamed: {filename} -> {new_filename}")
 
-    return min_diff
+# Folder path where the files are located
+folder_path = "C:\\Users\\BIT\\Desktop\\Dataset\\unlabbelled\\aim_images\\turn_left\\images"
 
-t = int(input())
-for _ in range(t):
-    n, a, b = map(int, input().split())
-    c = list(map(int, input().split()))
-    print(min_range(n, a, b, c))
+# Call the function to add the prefix
+rename_files_in_folder(folder_path, prefix="turn_left_")
