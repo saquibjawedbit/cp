@@ -9,36 +9,35 @@ int main() {
     for(ll t = 1; t <= tc; t++) {
         string s; cin >> s;
         ll k; cin >> k;
-        
-        map<char, vector<ll>> mp;
-    
-        for(int i = 0; i < s.size(); i++) {
-            mp[s[i]].push_back(i);
+
+        if(k >= s.size()) {
+            cout << 0 << endl;
+            continue;
         }
 
-        map<ll, bool> isvisited;
+        int st = 0;
+        for(int i = 0; i <= k; i++) {
+            if(s[i] != '0' && s[i] < s[st]) {
+                st = i;
+            }
+        }
 
-        for(auto &[ch, arr]: mp) {
-            for(auto v: arr) {
-                if(k <= 0) break;
-                while(v+1 < s.size() && isvisited[v]) v++;
-                if(v+1 < s.size() && s[v+1] == '0' && s[v] != '0') continue;
+        k -= st;
 
-                isvisited[v] = 1;
+        string ans = "";
+        ans.push_back(s[st]);
+
+        for(int i = st+1; i < s.size(); i++) {
+            while(k > 0 && ans.size() > 1 && ans.back() > s[i]) {
+                ans.pop_back();
                 k--;
             }
 
-            if(k <= 0) break;
+            ans.push_back(s[i]);
         }
 
-        string ans = "";
-        ll st = 0;
-        for(auto &[index, _] : isvisited) {
-            ans += s.substr(st, index+1);
-            st = index+2;
-        }
+        while(k-- > 0) ans.pop_back();
 
         cout << ans << endl;
-
     }
 }
