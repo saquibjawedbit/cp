@@ -6,9 +6,8 @@ using namespace std;
 
 const ll MOD = 1e9+7;
 
-ll solve(vector<ll> &arr, ll currentSum, ll target, map<ll, ll>  &mp) {
+ll solve(vector<ll> &arr, ll currentSum, ll target, vector<ll> &mp) {
     if(currentSum > target) {
-        mp[currentSum] = 0;
         return 0;
     }
 
@@ -17,7 +16,7 @@ ll solve(vector<ll> &arr, ll currentSum, ll target, map<ll, ll>  &mp) {
         return 1ll;
     }
 
-    if(mp.find(currentSum) != mp.end()) {
+    if(mp[currentSum] != -1) {
         return mp[currentSum];
     }
 
@@ -45,10 +44,8 @@ int main() {
 
         vector<ll> arr(n);
         for(auto &v: arr) cin >> v;
-
-        map<ll, ll> mp;
-
+        vector<ll> mp(target+1, -1);
         ll ans = solve(arr, 0, target, mp);
-        cout << ans ;
+        cout << ans << endl;
     }
 }
