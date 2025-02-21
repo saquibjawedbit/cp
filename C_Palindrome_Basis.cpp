@@ -1,54 +1,56 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-#define ll long long
+const int N = 40004, M = 502;
+const long long MOD = 1000000007;
+long long dp[N][M];
 
-const ll MOD = 1e9+7;
-
-bool isPalindromic(ll n) {
-    string s = to_string(n);
-    string t = s;
-    reverse(t.begin(), t.end());
-    return s == t;
+int reverse(int n)
+{
+    int r=0;
+    while(n>0)
+    {
+        r=r*10+n%10;
+        n/=10;
+    }
+    return r;
 }
 
-ll solve(vector<ll> &st, ll currentSum, ll target, map<vector<ll>, ll>& dp, ll lastUsed) {
-    if(target < currentSum) return 0;
-    
-    if(target == currentSum) {
-        if(dp.find(st) != dp.end()) {
-            return 0;
-        }
-        dp[st] = 1;
-        return 1;
-    }
-    
-    ll ans = 0;
-    for(int i = lastUsed; i <= (target - currentSum); i++) {
-        if(isPalindromic(i)) {
-            st.push_back(i);
-            ans = (ans % MOD + solve(st, currentSum + i, target, dp, i) % MOD) % MOD; // Pass i as lastUsed
-            st.pop_back();
-        }
-    }
-    
-    return ans;
+bool palindrome(int n)
+{
+    return (reverse(n)==n); 
 }
 
-
-int main() {
+int main()
+{
+    vector<int> palin;
+    palin.push_back(0);
+    for(int i=1;i<2*N;i++)
+    {
+        if(palindrome(i))
+            palin.push_back(i);
+    }
+    for(int j=1;j<M;j++)
+        dp[0][j]=1;
+    for(int i=1;i<N;i++)
+    {
+        dp[i][0]=0;
+        for(int j=1;j<M;j++)
+        {
+            if(palin[j]<=i)
+                dp[i][j]=(dp[i][j-1]+dp[i-palin[j]][j])%MOD;
+            else
+                dp[i][j]=dp[i][j-1];
+        }
+    }
     ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    ll tc; cin >> tc;
-    for(ll t = 1; t <= tc; t++) {
-        // Code here
-        ll n; cin >> n;
-        map<vector<ll>, ll> dp;
-        vector<ll> st;
-        ll ans = solve(st, 0, n, dp, 1) % MOD;
-
-        cout << ans << endl;
+    cin.tie(NULL);
+    int tc;
+    cin >> tc;
+    while(tc--)
+    {
+        int n;
+        cin >> n;
+        cout << dp[n][M-1] << '\n';
     }
 }
