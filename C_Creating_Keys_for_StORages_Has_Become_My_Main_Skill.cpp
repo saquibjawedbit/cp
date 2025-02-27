@@ -15,7 +15,6 @@ int main() {
         ll n, x; cin >> n >> x;
 
         vector<ll> a(n, 0);
-
         ll currentNum = 0;
         for(ll i = 0 ; i <= 63; i++) {
             ll lastBit = x & (1LL << i);

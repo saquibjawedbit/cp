@@ -14,40 +14,30 @@ int main() {
         // Code here
         ll k; cin >> k;
 
-        if(k == 0) {
-            cout << 2 << endl;
-            cout << "0 100" << endl;
-            cout << "1 401" << endl;
-        }
-
-        if(k == 1) {
-            cout << 2 << endl;
-            cout << "0 100" << endl;
-            cout << "0 101" << endl;
-        }
-        
-        vector<pair<ll,ll>> ans; ll count  = 0;
-        for(int i = 0; i <= 500; i++) {
+        vector<pair<ll,ll>> ans;
+        ll cnt = 0; ll dm = 0;
+        for(ll i = 0; i <= 500; i++) {
             ll delta = 0;
-            for(int j = i+1; j <= 500; j++) {
+            for(ll j = dm; j <= 500; j++) {
                 ans.push_back({i,j});
-                count += delta;
-                delta += 1;
-                
-                if(count == k) {
+                cnt += delta;
+                delta++; dm++;
+                if(cnt + delta > k) {
                     break;
                 }
-                else if(count+ delta > k) {
+
+                if(cnt == k) {
                     break;
                 }
             }
-
-            if(count == k) break;
+            if(cnt == k) {
+                break;
+            }
         }
 
         cout << ans.size() << endl;
-        for(auto &v: ans) {
-            cout << v.first << " " << v.second << endl;
+        for(auto p : ans) {
+            cout << p.first << " " << p.second << endl;
         }
 
     
