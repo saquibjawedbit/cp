@@ -9,7 +9,7 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
-    ll tc; cin >> tc;
+    ll tc = 1; cin >> tc;
     for(ll t = 1; t <= tc; t++) {
         // Code here
     }
